@@ -1,29 +1,446 @@
-#root {
+/* styles.css */
+:root {
+  --primary: #4a6fa5;
+  --primary-light: #6384b8;
+  --secondary: #47b881;
+  --danger: #e15241;
+  --text: #333;
+  --text-light: #666;
+  --bg: #f8f9fa;
+  --card-bg: #fff;
+  --border: #e1e4e8;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-select {
-  margin: 0.5em;
-  padding: 0.5em;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+  line-height: 1.5;
 }
 
-input[type='text'] {
-  width: 50vw;
-  padding: 0.5em;
-  margin: 0 0.5em;
+a {
+  color: var(--primary);
+  text-decoration: none;
 }
 
-input[type='submit'] {
-  padding: 0.1em 0.5em;
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+h1, h2, h3 {
+  margin-bottom: 1rem;
+  font-weight: 600;
 }
 
 ul {
   list-style: none;
-  margin-left: 0.5em;
-  padding-left: 0;
 }
 
-li {
-  margin-bottom: 0.5em;
+/* レイアウト */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--primary);
+  color: white;
+}
+
+.logo a {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.logo a:hover {
+  text-decoration: none;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ナビゲーション */
+.main-nav {
+  width: 200px;
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border);
+}
+
+.main-nav ul {
+  padding: 1rem 0;
+}
+
+.main-nav li a {
+  display: block;
+  padding: 0.75rem 1.5rem;
+  color: var(--text);
+  border-left: 3px solid transparent;
+}
+
+.main-nav li a:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  text-decoration: none;
+}
+
+.main-nav li a.active {
+  border-left-color: var(--primary);
+  background-color: rgba(74, 111, 165, 0.08);
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* カード */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ボタン */
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-light);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  color: white;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+/* ダッシュボード */
+.dashboard h1 {
+  margin-bottom: 1.5rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--card-bg);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.stat-label {
+  color: var(--text-light);
+  font-size: 0.875rem;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.progress {
+  height: 100%;
+  background-color: var(--primary);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.task-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.task-list li:last-child {
+  border-bottom: none;
+}
+
+.task-list li.completed {
+  color: var(--text-light);
+  text-decoration: line-through;
+}
+
+.task-list.overdue li {
+  color: var(--danger);
+}
+
+.view-all-link {
+  display: block;
+  text-align: right;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+/* カレンダー */
+.calendar-controls {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-nav-btn {
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.calendar-nav-btn.today {
+  background-color: var(--primary);
+  color: white;
+}
+
+.add-task-btn {
+  margin-left: auto;
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  gap: 1px;
+  background-color: var(--border);
+}
+
+.calendar-day {
+  background-color: var(--card-bg);
+  padding: 0.5rem;
+  min-height: 100px;
+}
+
+.calendar-day.other-month {
+  background-color: #f9f9f9;
+  color: #ccc;
+}
+
+.day-number {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.calendar-todo {
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 0.25rem;
+  background-color: rgba(74, 111, 165, 0.1);
+  border-left: 3px solid var(--primary);
+  font-size: 0.8125rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 0 2px 2px 0;
+}
+
+.calendar-todo.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.more-todos {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  text-align: right;
+}
+
+/* Todo ページ */
+.todo-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.todo-form {
+  display: flex;
+  margin-bottom: 1.5rem;
+}
+
+.todo-form input[type="text"] {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 4px 0 0 4px;
+  font-size: 1rem;
+}
+
+.todo-form input[type="submit"] {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.todo-list {
+  background-color: var(--card-bg);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item input[type="checkbox"] {
+  margin-right: 1rem;
+}
+
+.todo-item input[type="text"] {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.todo-item input[type="text"]:focus {
+  border-color: var(--border);
+  outline: none;
+}
+
+.todo-item input[type="text"]:disabled {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.todo-item button {
+  padding: 0.25rem 0.75rem;
+  margin-left: 0.5rem;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.todo-item button:hover {
+  background-color: #e0e0e0;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+  }
+  
+  .main-nav {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .main-nav ul {
+    display: flex;
+    padding: 0;
+    overflow-x: auto;
+  }
+  
+  .main-nav li {
+    flex-shrink: 0;
+  }
+  
+  .main-nav li a {
+    border-left: none;
+    border-bottom: 3px solid transparent;
+  }
+  
+  .main-nav li a.active {
+    border-left-color: transparent;
+    border-bottom-color: var(--primary);
+  }
+  
+  .dashboard-grid,
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .calendar-body {
+    grid-auto-rows: minmax(80px, auto);
+  }
 }

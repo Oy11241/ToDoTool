@@ -1,3 +1,5 @@
+import { Todo } from "../types";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const isTodo = (arg: any): arg is Todo => {
   return (
