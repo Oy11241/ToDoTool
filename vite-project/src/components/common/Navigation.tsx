@@ -18,7 +18,7 @@ export const Navigation = () => {
             to="/todos" 
             className={({ isActive }) => isActive ? 'active' : ''}
           >
-            タスク管理
+            Todo管理
           </NavLink>
         </li>
         <li>

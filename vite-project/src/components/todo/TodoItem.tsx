@@ -1,8 +1,12 @@
 import { Todo } from "../../types";
 
-
+/**
+ * TodoItemコンポーネントのProps
+ */
 type TodoItemProps = {
+  /** Todo */
   todo: Todo;
+  /**　Todo編集時の処理　*/
   onUpdate: <K extends keyof Todo, V extends Todo[K]>(
     id: number,
     key: K,
@@ -10,6 +14,14 @@ type TodoItemProps = {
   ) => void;
 };
 
+/**
+ * Todoを表示・編集するためのコンポーネント
+ *
+ * @param todo Todo
+ * @param onUpdate Todo編集時の処理
+ * @return コンポーネント
+ * @description 既に削除されたTodoの場合は、復元ボタンを表示させる
+ */
 export const TodoItem = ({ todo, onUpdate }: TodoItemProps) => {
   return (
     <li className="todo-item">

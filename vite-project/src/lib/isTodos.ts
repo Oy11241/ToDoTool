@@ -1,6 +1,11 @@
 import { Todo } from "../types";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/**
+ * 任意の値がTodo型であるかを判定する
+ *
+ * @param arg 判定対象の値
+ * @return arg is Todo 判定結果
+ */
 const isTodo = (arg: any): arg is Todo => {
   return (
     typeof arg === 'object' &&
@@ -12,6 +17,12 @@ const isTodo = (arg: any): arg is Todo => {
   );
 };
 
+/**
+ * 任意の値がTodo[]型であるかを判定する
+ *
+ * @param arg 判定対象の値
+ * @return 判定結果
+ */
 export const isTodos = (arg: any): arg is Todo[] => {
   return Array.isArray(arg) && arg.every(isTodo);
 };

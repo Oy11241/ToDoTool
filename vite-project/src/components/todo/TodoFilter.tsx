@@ -1,12 +1,27 @@
 import { FILTERS } from "../../constants";
 import { Filter } from "../../types";
 
+/**
+ * TodoFilterコンポーネントのProps
+ */
 type TodoFilterProps = {
+  /** 現在選択中のフィルター */
   currentFilter: Filter;
+  /** フィルター変更時の処理  */
   onFilterChange: (filter: Filter) => void;
 };
 
-export const TodoFilter = ({ currentFilter, onFilterChange }: TodoFilterProps) => {
+/**
+ * Todoをフィルタリングする選択リストコンポーネント
+ *
+ * @param currentFilter 現在選択中のフィルター値
+ * @param onFilterChange フィルター変更時の処理
+ * @return コンポーネント
+ */
+export const TodoFilter = ({
+  currentFilter,
+  onFilterChange,
+}: TodoFilterProps) => {
   return (
     <select
       value={currentFilter}

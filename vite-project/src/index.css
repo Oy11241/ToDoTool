@@ -403,7 +403,6 @@ ul {
   background-color: #e0e0e0;
 }
 
-/* レスポンシブ対応 */
 @media (max-width: 768px) {
   .main-content {
     flex-direction: column;
