@@ -55,7 +55,7 @@ export const DashboardAlert = ({ todos }: DashboardAlertProps) => {
             今日が期限の未完了タスクが<strong>{dueTodayCount}件</strong>
             あります
           </span>
-          <Link to="/todos" className="alert-link">
+          <Link to="/calendar" className="alert-link">
             確認する
           </Link>
         </div>

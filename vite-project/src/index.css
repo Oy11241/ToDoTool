@@ -667,3 +667,55 @@ ul {
   text-decoration: underline;
   font-size: 0.9rem;
 }
+
+.calendar-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.todo-on-date {
+  flex: 1;
+}
+
+.todo-on-date h2 {
+  margin-top: 0;
+}
+
+.todo-on-date ul {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-on-date li {
+  padding: 5px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.todo-on-date li.checked {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.priority-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
+  min-width: 40px;
+  text-align: center;
+}
+
+/* 色付け（barクラスに合わせて） */
+.priority-badge.high {
+  background-color: #e53935;
+}
+
+.priority-badge.medium {
+  background-color: #fb8c00;
+}
+
+.priority-badge.low {
+  background-color: #43a047;
+}

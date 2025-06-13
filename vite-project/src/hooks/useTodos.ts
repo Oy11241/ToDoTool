@@ -19,10 +19,13 @@ export const useTodos = (initialFilter?: Filter) => {
   const [todos, setTodos] = useState<Todo[]>([]);
   // フィルター
   const [filter, setFilter] = useState<Filter>(initialFilter || "all");
-  // カレンダー日付
+  // 期限日
   const [date, setDate] = useState<Date>(new Date());
   // 優先度
   const [priority, setPriority] = useState<Priority>("medium");
+  // カレンダー日付
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+
   // DataPickerを日本語表記にするために使用
   registerLocale("ja", ja);
 
@@ -63,10 +66,10 @@ export const useTodos = (initialFilter?: Filter) => {
   };
 
   /**
-   * カレンダーの変更時にStateを更新する
-   * @param date カレンダー日付
+   * 期限日の変更時にStateを更新する
+   * @param date 期限日
    */
-  const handleCalenderChange = (date: Date) => {
+  const handleCalendarChange = (date: Date) => {
     setDate(date);
   };
 
@@ -76,6 +79,14 @@ export const useTodos = (initialFilter?: Filter) => {
    */
   const handlePriorityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPriority(e.target.value as Priority);
+  };
+
+  /**
+   * カレンダー日付の変更時にStateを更新する
+   * @param date カレンダー日付
+   */
+  const handleSelectedDateChange = (date: Date) => {
+    setSelectedDate(date);
   };
 
   /**
@@ -146,10 +157,12 @@ export const useTodos = (initialFilter?: Filter) => {
     date,
     priority,
     filteredTodos,
+    selectedDate,
     handleTextChange,
     handleFilterChange,
-    handleCalenderChange,
+    handleCalendarChange,
     handlePriorityChange,
+    handleSelectedDateChange,
     handleSubmit,
     handleTodoUpdate,
     handleEmptyTrash,

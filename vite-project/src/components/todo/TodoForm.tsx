@@ -16,7 +16,7 @@ type TodoFormProps = {
   /** カレンダー日付 */
   date: Date;
   /** カレンダ－日付変更時の処理  */
-  onCalenderChange: (date: Date) => void;
+  onCalendarChange: (date: Date) => void;
   /** 追加ボタン押下時の処理 */
   onSubmit: () => void;
 };
@@ -35,7 +35,7 @@ export const TodoForm = ({
   priority,
   onPriorityChange,
   date,
-  onCalenderChange,
+  onCalendarChange,
   onSubmit,
 }: TodoFormProps) => {
   const today = new Date();
@@ -56,7 +56,7 @@ export const TodoForm = ({
           selected={date}
           minDate={today}
           onChange={(selectedDate) => {
-            onCalenderChange(selectedDate || today);
+            onCalendarChange(selectedDate || today);
           }}
         />
       </div>
