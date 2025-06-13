@@ -12,12 +12,12 @@ export const TodoPage = () => {
   const {
     text,
     filter,
-    date,
+    dueDate,
     priority,
     filteredTodos,
     handleTextChange,
     handleFilterChange,
-    handleCalenderChange,
+    handleDueDateChange,
     handlePriorityChange,
     handleSubmit,
     handleTodoUpdate,
@@ -46,14 +46,14 @@ export const TodoPage = () => {
 
       {showForm && (
         <div className="todo-input-section">
-          <div className="form-and-calendar-container">
+          <div className="form-container">
             <TodoForm
               text={text}
               onTextChange={handleTextChange}
               priority={priority}
               onPriorityChange={handlePriorityChange}
-              date={date}
-              onCalenderChange={handleCalenderChange}
+              date={dueDate}
+              onCalendarChange={handleDueDateChange}
               onSubmit={handleSubmit}
             />
           </div>

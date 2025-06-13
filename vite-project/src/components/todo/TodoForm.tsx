@@ -48,7 +48,7 @@ export const TodoForm = ({
         onSubmit();
       }}
     >
-      <div className="calendar-item-wrapper">
+      <div className="due-date-wrapper">
         <label>期限</label>
         <DatePicker
           dateFormat="yyyy/MM/dd"

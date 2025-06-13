@@ -1,50 +1,109 @@
-# React + TypeScript + Vite
+# TodoApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite を用いたタスク管理アプリです。  
+シンプルで使いやすい UI を目指し、日々のタスクを効率的に管理できるよう設計されています。
+React と typeScript の勉強のために作成しました。
 
-Currently, two official plugins are available:
+## 🔧 使用技術
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React**
+- **TypeScript**
+- **Vite**
+- **その他必要なライブラリ**
 
-## Expanding the ESLint configuration
+## 📸 画面一覧
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### ✅ Todo 管理画面
 
-- Configure the top-level `parserOptions` property like this:
+- タスクの追加、削除、編集が可能（※登録したタスクはローカルストレージに保存される）
+- タスクには完了状態、期限、優先度の設定が可能
+- ステータス別のフィルタリングを用意
+- ごみ箱から不要なタスクの削除
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 📊 ダッシュボード画面
+
+- 総タスク数・完了・未完了の統計表示
+- 優先度別のタスク可視化
+- 期限切れタスクのアラート
+- 本日が期限の未完了タスクのアラート
+
+### 📅 カレンダー画面
+
+- 日付ごとのタスク表示
+- カレンダー形式で視覚的にタスクを確認
+- 完了したタスクは打ち消し線で表示
+
+## 🚀 起動方法
+
+### 1. リポジトリをクローン
+
+```bash
+git clone https://github.com/Oy11241/ToDoTool.git
+cd vite-project
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 2. 依存関係をインストール
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm install
 ```
+
+### 3. 開発サーバーを起動
+
+```bash
+npm run dev
+```
+
+## 📁 ディレクトリ構成
+
+```bash
+src/
+│ App.tsx # ルーティングとレイアウトのエントリポイント
+│ index.css # 全体スタイル
+│ main.tsx # アプリのエントリポイント
+│ vite-env.d.ts # Viteの型補完用定義
+│
+├─components # UIコンポーネント群
+│ ├─calendar # カレンダー画面用コンポーネント
+│ │ CalendarTodoList.tsx
+│ │
+│ ├─common # 共通UI（ヘッダーやナビゲーションなど）
+│ │ Header.tsx
+│ │ Layout.tsx
+│ │ Navigation.tsx
+│ │
+│ ├─dashboard # ダッシュボード画面用コンポーネント
+│ │ DashboardAlert.tsx
+│ │ DashboardBar.tsx
+│ │ DashboardGrid.tsx
+│ │
+│ └─todo # Todo管理画面用コンポーネント
+│ TodoFilter.tsx
+│ TodoForm.tsx
+│ TodoItem.tsx
+│ TodoList.tsx
+│
+├─constants # 定数をまとめたファイル群
+│ index.ts
+│
+├─hooks # カスタムフック
+│ useTodos.ts # Todo操作に関するロジックをカスタムフックとして抽出
+│
+├─lib # 汎用ライブラリ関数
+│ isTodos.ts # Todo配列の型チェック用関数
+│
+├─pages # 各ページコンポーネント
+│ CalendarPage.tsx
+│ DashboardPage.tsx
+│ TodoPage.tsx
+│
+└─types # 型定義ファイル
+　 index.ts
+```
+
+## 💡 今後の予定
+
+- より使いやすい画面になるよう、既存画面への機能追加・UI 修正
+- バックエンドに DB を導入し、サーバサイドを意識した実装
+- テスト導入（Jest + React Testing Library）
+- レスポンシブ対応・モバイル UI 最適化（Tailwind CSS）

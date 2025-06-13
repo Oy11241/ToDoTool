@@ -20,7 +20,7 @@ export const useTodos = (initialFilter?: Filter) => {
   // フィルター
   const [filter, setFilter] = useState<Filter>(initialFilter || "all");
   // 期限日
-  const [date, setDate] = useState<Date>(new Date());
+  const [dueDate, setDueDate] = useState<Date>(new Date());
   // 優先度
   const [priority, setPriority] = useState<Priority>("medium");
   // カレンダー日付
@@ -67,10 +67,10 @@ export const useTodos = (initialFilter?: Filter) => {
 
   /**
    * 期限日の変更時にStateを更新する
-   * @param date 期限日
+   * @param dueDate 期限日
    */
-  const handleCalendarChange = (date: Date) => {
-    setDate(date);
+  const handleDueDateChange = (dueDate: Date) => {
+    setDueDate(dueDate);
   };
 
   /**
@@ -100,14 +100,14 @@ export const useTodos = (initialFilter?: Filter) => {
       id: new Date().getTime(),
       checked: false,
       removed: false,
-      dueDate: date,
+      dueDate,
       priority,
     };
 
     // 初期化
     setTodos((todos) => [newTodo, ...todos]);
     setText("");
-    setDate(new Date());
+    setDueDate(new Date());
     setPriority("medium");
   };
 
@@ -154,13 +154,13 @@ export const useTodos = (initialFilter?: Filter) => {
     text,
     todos,
     filter,
-    date,
+    dueDate,
     priority,
     filteredTodos,
     selectedDate,
     handleTextChange,
     handleFilterChange,
-    handleCalendarChange,
+    handleDueDateChange,
     handlePriorityChange,
     handleSelectedDateChange,
     handleSubmit,

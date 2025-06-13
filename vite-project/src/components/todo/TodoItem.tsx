@@ -33,7 +33,7 @@ export const TodoItem = ({ todo, onUpdate }: TodoItemProps) => {
         checked={todo.checked}
         onChange={() => onUpdate(todo.id, "checked", !todo.checked)}
       />
-      <div className="calendar-item-wrapper">
+      <div className="due-date-wrapper">
         <label>期限</label>
         <DatePicker
           dateFormat="yyyy/MM/dd"
