@@ -8,12 +8,13 @@ import { Todo } from "../types";
  */
 const isTodo = (arg: any): arg is Todo => {
   return (
-    typeof arg === 'object' &&
-    Object.keys(arg).length === 4 &&
-    typeof arg.id === 'number' &&
-    typeof arg.value === 'string' &&
-    typeof arg.checked === 'boolean' &&
-    typeof arg.removed === 'boolean'
+    typeof arg === "object" &&
+    typeof arg.id === "number" &&
+    typeof arg.value === "string" &&
+    typeof arg.checked === "boolean" &&
+    typeof arg.removed === "boolean" &&
+    typeof arg.dueDate === "object" &&
+    typeof arg.priority === "string"
   );
 };
 

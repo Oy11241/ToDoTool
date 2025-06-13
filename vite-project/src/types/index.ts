@@ -11,16 +11,24 @@ export type Todo = {
   /** 削除状態（true：削除済、false：未削除） */
   removed: boolean;
   /** 期限日 */
-  dueDate?: Date;
+  dueDate: Date;
   /** 優先度 */
-  priority?: "low" | "medium" | "high";
+  priority: Priority;
 };
 
 /**
  * ToDoの表示フィルター
- * - "all": すべてのタスク
- * - "checked": 完了したタスク
- * - "unchecked": 未完了のタスク
- * - "removed": ごみ箱に入っているタスク
+ *  "all": すべてのタスク
+ *  "checked": 完了したタスク
+ *  "unchecked": 未完了のタスク
+ *  "removed": ごみ箱に入っているタスク
  */
 export type Filter = "all" | "checked" | "unchecked" | "removed";
+
+/**
+ * ToDoの優先度
+ *  "low": 低
+ *  "medium": 中
+ *  "high": 高
+ */
+export type Priority = "low" | "medium" | "high";

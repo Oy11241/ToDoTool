@@ -19,10 +19,13 @@ type TodoListProps = {
  * Todo一覧を表示・編集するためのコンポーネント
  *
  * @param todos Todoリスト
- * @param onUpdate Todo編集時の処理　
+ * @param onUpdate Todo編集時の処理
  * @return コンポーネント
  */
-export const TodoList = ({ todos, onUpdate }: TodoListProps) => {
+export const TodoList = ({
+  todos,
+  onUpdate,
+}: TodoListProps) => {
   if (todos.length === 0) {
     return <p className="empty-message">タスクがありません</p>;
   }
@@ -30,7 +33,11 @@ export const TodoList = ({ todos, onUpdate }: TodoListProps) => {
   return (
     <ul className="todo-list">
       {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} onUpdate={onUpdate} />
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          onUpdate={onUpdate}
+        />
       ))}
     </ul>
   );

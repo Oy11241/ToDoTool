@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import localforage from "localforage";
-import { Todo, Filter } from "../types";
+import { Todo, Filter, Priority } from "../types";
 import { isTodos } from "../lib/isTodos";
 import { LOCAL_STORAGE_KEY } from "../constants";
+import { registerLocale } from "react-datepicker";
+import { ja } from "date-fns/locale/ja";
 
 /**
  * Todo管理画面で使用する変数と関数を提供する
@@ -17,6 +19,12 @@ export const useTodos = (initialFilter?: Filter) => {
   const [todos, setTodos] = useState<Todo[]>([]);
   // フィルター
   const [filter, setFilter] = useState<Filter>(initialFilter || "all");
+  // カレンダー日付
+  const [date, setDate] = useState<Date>(new Date());
+  // 優先度
+  const [priority, setPriority] = useState<Priority>("medium");
+  // DataPickerを日本語表記にするために使用
+  registerLocale("ja", ja);
 
   // 設定されたフィルターの値で抽出されたToDoリストを作成
   const filteredTodos = todos.filter((todo) => {
@@ -47,11 +55,27 @@ export const useTodos = (initialFilter?: Filter) => {
   };
 
   /**
-   * フィルターを変更時にStateを更新する
+   * フィルターの変更時にStateを更新する
    * @param newFilter 新しいフィルター値
    */
   const handleFilterChange = (newFilter: Filter) => {
     setFilter(newFilter);
+  };
+
+  /**
+   * カレンダーの変更時にStateを更新する
+   * @param date カレンダー日付
+   */
+  const handleCalenderChange = (date: Date) => {
+    setDate(date);
+  };
+
+  /**
+   * 優先度の変更時にStateを更新する
+   * @param e 入力イベント
+   */
+  const handlePriorityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setPriority(e.target.value as Priority);
   };
 
   /**
@@ -65,10 +89,15 @@ export const useTodos = (initialFilter?: Filter) => {
       id: new Date().getTime(),
       checked: false,
       removed: false,
+      dueDate: date,
+      priority,
     };
 
+    // 初期化
     setTodos((todos) => [newTodo, ...todos]);
     setText("");
+    setDate(new Date());
+    setPriority("medium");
   };
 
   /**
@@ -114,9 +143,13 @@ export const useTodos = (initialFilter?: Filter) => {
     text,
     todos,
     filter,
+    date,
+    priority,
     filteredTodos,
     handleTextChange,
     handleFilterChange,
+    handleCalenderChange,
+    handlePriorityChange,
     handleSubmit,
     handleTodoUpdate,
     handleEmptyTrash,
