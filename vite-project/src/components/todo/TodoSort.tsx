@@ -19,7 +19,7 @@ type TodoSortProps = {
  */
 export const TodoSort = ({ sort, onSortChange }: TodoSortProps) => {
   return (
-    <div>
+    <div className="flex items-center">
       <label htmlFor="sort-select">並び替え:</label>
       <select
         id="sort-select"

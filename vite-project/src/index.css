@@ -168,6 +168,12 @@ ul {
   border: 1px solid var(--border);
 }
 
+.todo-controls-right {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .todo-form {
   display: flex;
 }

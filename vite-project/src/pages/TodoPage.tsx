@@ -35,14 +35,14 @@ export const TodoPage = () => {
     <div className="todo-page">
       <h1>Todo管理</h1>
 
-      <div className="todo-controls flex justify-between items-center">
-        <div>
+      <div className="todo-controls">
+        <div className="todo-controls-left">
           <TodoFilter
             currentFilter={filter}
             onFilterChange={handleFilterChange}
           />
         </div>
-        <div className="flex items-center">
+        <div className="todo-controls-right">
           {showEmptyTrashButton && (
             <button
               onClick={handleEmptyTrash}

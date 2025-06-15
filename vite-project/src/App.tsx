@@ -8,8 +8,11 @@ import { CalendarPage } from "./pages/CalendarPage";
 // - `<Routes>` 内に新たな `<Route path="/your-path" element={<YourComponent />} />` を追加
 // - 新しいページ用のコンポーネントを `pages/` フォルダに作成
 export const App = () => {
+  // GitHub Pages用のベースパス設定
+  const basePath = "/ToDoTool";
+
   return (
-    <Router>
+    <Router basename={basePath}>
       <Layout>
         <Routes>
           <Route path="/" element={<DashboardPage />} />

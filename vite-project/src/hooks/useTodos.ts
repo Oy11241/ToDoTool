@@ -147,6 +147,7 @@ export const useTodos = (initialFilter?: Filter) => {
     setText("");
     setDueDate(new Date());
     setPriority("medium");
+    setSort(sort);
   };
 
   /**
