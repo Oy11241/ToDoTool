@@ -3,8 +3,7 @@ import { useTodos } from "../hooks/useTodos";
 import { TodoFilter } from "../components/todo/TodoFilter";
 import { TodoForm } from "../components/todo/TodoForm";
 import { TodoList } from "../components/todo/TodoList";
-import { Filter, Sort, Todo } from "../types";
-import { useState, useMemo } from "react";
+import { Filter } from "../types";
 import { TodoSort } from "../components/todo/TodoSort";
 
 export const TodoPage = () => {
