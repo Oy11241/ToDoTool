@@ -3,7 +3,9 @@ import { useTodos } from "../hooks/useTodos";
 import { TodoFilter } from "../components/todo/TodoFilter";
 import { TodoForm } from "../components/todo/TodoForm";
 import { TodoList } from "../components/todo/TodoList";
-import { Filter } from "../types";
+import { Filter, Sort, Todo } from "../types";
+import { useState, useMemo } from "react";
+import { TodoSort } from "../components/todo/TodoSort";
 
 export const TodoPage = () => {
   const [searchParams] = useSearchParams();
@@ -14,11 +16,14 @@ export const TodoPage = () => {
     filter,
     dueDate,
     priority,
+    sort,
     filteredTodos,
+    sortedTodos,
     handleTextChange,
     handleFilterChange,
     handleDueDateChange,
     handlePriorityChange,
+    handleSortChange,
     handleSubmit,
     handleTodoUpdate,
     handleEmptyTrash,
@@ -31,19 +36,25 @@ export const TodoPage = () => {
     <div className="todo-page">
       <h1>Todo管理</h1>
 
-      <div className="todo-controls">
-        <TodoFilter
-          currentFilter={filter}
-          onFilterChange={handleFilterChange}
-        />
-
-        {showEmptyTrashButton && (
-          <button onClick={handleEmptyTrash} className="btn btn-danger btn-sm">
-            ゴミ箱を空にする
-          </button>
-        )}
+      <div className="todo-controls flex justify-between items-center">
+        <div>
+          <TodoFilter
+            currentFilter={filter}
+            onFilterChange={handleFilterChange}
+          />
+        </div>
+        <div className="flex items-center">
+          {showEmptyTrashButton && (
+            <button
+              onClick={handleEmptyTrash}
+              className="btn btn-danger btn-sm"
+            >
+              ゴミ箱を空にする
+            </button>
+          )}
+          <TodoSort sort={sort} onSortChange={handleSortChange} />
+        </div>
       </div>
-
       {showForm && (
         <div className="todo-input-section">
           <div className="form-container">
@@ -60,7 +71,7 @@ export const TodoPage = () => {
         </div>
       )}
 
-      <TodoList todos={filteredTodos} onUpdate={handleTodoUpdate} />
+      <TodoList todos={sortedTodos} onUpdate={handleTodoUpdate} />
     </div>
   );
 };

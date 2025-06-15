@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import localforage from "localforage";
-import { Todo, Filter, Priority } from "../types";
+import { Todo, Filter, Priority, Sort } from "../types";
 import { isTodos } from "../lib/isTodos";
 import { LOCAL_STORAGE_KEY } from "../constants";
 import { registerLocale } from "react-datepicker";
@@ -25,6 +25,8 @@ export const useTodos = (initialFilter?: Filter) => {
   const [priority, setPriority] = useState<Priority>("medium");
   // カレンダー日付
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  // ソート
+  const [sort, setSort] = useState<Sort>("priorityAsc");
 
   // DataPickerを日本語表記にするために使用
   registerLocale("ja", ja);
@@ -48,6 +50,34 @@ export const useTodos = (initialFilter?: Filter) => {
         return todo;
     }
   });
+
+  // 設定されたソートの値で並び替えされたToDoリストを作成
+  const sortedTodos = useMemo(() => {
+    const sorted = [...filteredTodos].sort((a: Todo, b: Todo) => {
+      let result = 0;
+
+      if (sort.startsWith("priority")) {
+        const priorityOrder = { high: 0, medium: 1, low: 2 };
+        result = priorityOrder[a.priority] - priorityOrder[b.priority];
+      } else if (sort.startsWith("dueDate")) {
+        const dateA = new Date(
+          a.dueDate.getFullYear(),
+          a.dueDate.getMonth(),
+          a.dueDate.getDate()
+        ).getTime();
+        const dateB = new Date(
+          b.dueDate.getFullYear(),
+          b.dueDate.getMonth(),
+          b.dueDate.getDate()
+        ).getTime();
+        result = dateA - dateB;
+      }
+
+      return sort.endsWith("asc") ? result : -result;
+    });
+
+    return sorted;
+  }, [filteredTodos, sort]);
 
   /**
    * Todo入力欄の変更時にStateを更新する
@@ -87,6 +117,14 @@ export const useTodos = (initialFilter?: Filter) => {
    */
   const handleSelectedDateChange = (date: Date) => {
     setSelectedDate(date);
+  };
+
+  /**
+   * ソートの変更時にStateを更新する
+   * @param sort ソート
+   */
+  const handleSortChange = (sort: Sort) => {
+    setSort(sort);
   };
 
   /**
@@ -156,13 +194,16 @@ export const useTodos = (initialFilter?: Filter) => {
     filter,
     dueDate,
     priority,
+    sort,
     filteredTodos,
+    sortedTodos,
     selectedDate,
     handleTextChange,
     handleFilterChange,
     handleDueDateChange,
     handlePriorityChange,
     handleSelectedDateChange,
+    handleSortChange,
     handleSubmit,
     handleTodoUpdate,
     handleEmptyTrash,

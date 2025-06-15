@@ -32,3 +32,16 @@ export type Filter = "all" | "checked" | "unchecked" | "removed";
  *  "high": 高
  */
 export type Priority = "low" | "medium" | "high";
+
+/**
+ * ソート
+ *  "priorityAsc": 優先度（昇順）
+ *  "priorityDesc": 優先度（降順）
+ *  "dueDateAsc": 期限（昇順）
+ *  "dueDateDesc": 期限（降順）
+ */
+export type Sort =
+  | "priorityAsc"
+  | "priorityDesc"
+  | "dueDateAsc"
+  | "dueDateDesc";

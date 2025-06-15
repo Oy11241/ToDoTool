@@ -17,13 +17,20 @@ type DashboardAlertProps = {
  * @return コンポーネント
  */
 export const DashboardAlert = ({ todos }: DashboardAlertProps) => {
+  const today = new Date();
+
   // 期限切れのタスク数
   const overdue = todos.filter(
-    (t) => !t.checked && t.dueDate && new Date(t.dueDate) < new Date()
+    (t) =>
+      !t.checked &&
+      new Date(
+        t.dueDate.getFullYear(),
+        t.dueDate.getMonth(),
+        t.dueDate.getDate()
+      ) < new Date(today.getFullYear(), today.getMonth(), today.getDate())
   ).length;
 
   // 今日が期限のタスク数
-  const today = new Date();
   const dueTodayCount = todos.filter((t) => {
     if (!t.dueDate || t.checked) return false;
     const dueDate = new Date(t.dueDate);
