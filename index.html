@@ -4,8 +4,34 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TodoApp</title>
-    <script type="module" crossorigin src="/ToDoTool/assets/index-DWObuJ0N.js"></script>
+    <title>Todo App</title>
+    <script>
+      // 404.htmlからリダイレクトされた場合の処理
+      (function () {
+        var loc = window.location;
+        if (loc.search) {
+          var q = {};
+          loc.search
+            .slice(1)
+            .split("&")
+            .forEach(function (v) {
+              var a = v.split("=");
+              q[a[0]] = a.slice(1).join("=").replace(/~and~/g, "&");
+            });
+          if (q.p !== undefined) {
+            window.history.replaceState(
+              null,
+              null,
+              loc.pathname.slice(0, -1) +
+                (q.p || "") +
+                (q.q ? "?" + q.q : "") +
+                loc.hash
+            );
+          }
+        }
+      })();
+    </script>
+    <script type="module" crossorigin src="/ToDoTool/assets/index-DtHr1_bS.js"></script>
     <link rel="stylesheet" crossorigin href="/ToDoTool/assets/index-CYzCUzHN.css">
   </head>
   <body>
